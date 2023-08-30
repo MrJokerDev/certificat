@@ -118,7 +118,7 @@
     <body>
         <div class="min-h-screen bg-gray-100">
             <div class="w-11/12 m-auto">
-                <div class="flex justify-center p-12 flex-shrink-0 text-white mr-6">
+                <div class="flex justify-center py-12 flex-shrink-0 text-white">
                     <a href="/"><img src="{{ asset('logo_1.png') }}" class="w-60"/></a>
                 </div>
                 <div class="sm:container mx-auto flex justify-center">
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 
-                <div class="sm:container mx-auto flex justify-center p-12">
+                <div class="sm:container mx-auto flex justify-center py-12">
                     <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Qidiruvga qaytish</a>
                 </div>
             </div>

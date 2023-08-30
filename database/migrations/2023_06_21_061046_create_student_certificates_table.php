@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('certificate_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 

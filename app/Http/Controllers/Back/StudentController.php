@@ -208,21 +208,21 @@ class StudentController extends Controller
         $shape_001_2 = $slide_001->createRichTextShape();
         $shape_001_2->setHeight(600);
         $shape_001_2->setWidth(600);
-        $shape_001_2->setOffsetX(415);
-        $shape_001_2->setOffsetY(565);
+        $shape_001_2->setOffsetX(422);
+        $shape_001_2->setOffsetY(570);
 
         // Set the dimensions and offsets for slide 1 Student seria number
         $shape_001_3 = $slide_001->createRichTextShape();
         $shape_001_3->setHeight(600);
         $shape_001_3->setWidth(600);
-        $shape_001_3->setOffsetX(265);
-        $shape_001_3->setOffsetY(565);
+        $shape_001_3->setOffsetX(263);
+        $shape_001_3->setOffsetY(570);
 
         $shape_001_3_1 = $slide_001->createRichTextShape();
         $shape_001_3_1->setHeight(600);
         $shape_001_3_1->setWidth(600);
         $shape_001_3_1->setOffsetX(245);
-        $shape_001_3_1->setOffsetY(565);
+        $shape_001_3_1->setOffsetY(570);
 
         // Set the background image for slide 1
         $background_001 = new Image();
@@ -239,15 +239,15 @@ class StudentController extends Controller
         $shape_001_1->getFont()->setColor(new Color('FF5430CE'));
 
         $shape_001_2 = $shape_001_2->createTextRun($dateS);
-        $shape_001_2->getFont()->setSize(15);
+        $shape_001_2->getFont()->setSize(13);
         $shape_001_2->getFont()->setBold(true);
 
         $shape_001_3 = $shape_001_3->createTextRun($student->seria_number);
-        $shape_001_3->getFont()->setSize(15);
+        $shape_001_3->getFont()->setSize(13);
         $shape_001_3->getFont()->setBold(true);
 
         $shape_001_4 = $shape_001_3_1->createTextRun($student->seria);
-        $shape_001_4->getFont()->setSize(15);
+        $shape_001_4->getFont()->setSize(13);
         $shape_001_4->getFont()->setBold(true);
         // end the text for slide 1
 
@@ -267,35 +267,35 @@ class StudentController extends Controller
         $shape_002_1 = $slide_002->createRichTextShape();
         $shape_002_1->setHeight(600);
         $shape_002_1->setWidth(1000);
-        $shape_002_1->setOffsetX(70);
-        $shape_002_1->setOffsetY(30);
+        $shape_002_1->setOffsetX(67);
+        $shape_002_1->setOffsetY(32);
 
         $shape_002_1_2 = $slide_002->createRichTextShape();
         $shape_002_1_2->setHeight(600);
         $shape_002_1_2->setWidth(1000);
         $shape_002_1_2->setOffsetX(50);
-        $shape_002_1_2->setOffsetY(30);
+        $shape_002_1_2->setOffsetY(32);
 
         // Set the dimensions and offsets for slide 2 Student Progress  0 top
         $shape_002_2 = $slide_002->createRichTextShape();
         $shape_002_2->setHeight(600);
         $shape_002_2->setWidth(270);
         $shape_002_2->setOffsetX(100);
-        $shape_002_2->setOffsetY(340);
+        $shape_002_2->setOffsetY(350);
 
         // Set the dimensions and offsets for slide 2 Student Progress 1 top
         $shape_002_3 = $slide_002->createRichTextShape();
         $shape_002_3->setHeight(600);
-        $shape_002_3->setWidth(240);
+        $shape_002_3->setWidth(270);
         $shape_002_3->setOffsetX(370);
-        $shape_002_3->setOffsetY(340);
+        $shape_002_3->setOffsetY(350);
 
         // Set the dimensions and offsets for slide 2 Student Progress 3 top
         $shape_002_4 = $slide_002->createRichTextShape();
         $shape_002_4->setHeight(600);
-        $shape_002_4->setWidth(250);
+        $shape_002_4->setWidth(270);
         $shape_002_4->setOffsetX(640);
-        $shape_002_4->setOffsetY(340);
+        $shape_002_4->setOffsetY(350);
 
         // Set the dimensions and offsets for slide 2 Student Progress 4 bottom
         $shape_002_5 = $slide_002->createRichTextShape();
@@ -307,7 +307,7 @@ class StudentController extends Controller
         // Set the dimensions and offsets for slide 2 Student Progress 5 bottom
         $shape_002_6 = $slide_002->createRichTextShape();
         $shape_002_6->setHeight(600);
-        $shape_002_6->setWidth(320);
+        $shape_002_6->setWidth(260);
         $shape_002_6->setOffsetX(640);
         $shape_002_6->setOffsetY(405);
 
@@ -316,26 +316,26 @@ class StudentController extends Controller
         $shape_002_7->setHeight(600);
         $shape_002_7->setWidth(250);
         $shape_002_7->setOffsetX(50);
-        $shape_002_7->setOffsetY(490);
+        $shape_002_7->setOffsetY(470);
 
         $shape_002_7_1 = $slide_002->createRichTextShape();
         $shape_002_7_1->setHeight(600);
         $shape_002_7_1->setWidth(250);
-        $shape_002_7_1->setOffsetX(365);
-        $shape_002_7_1->setOffsetY(525);
+        $shape_002_7_1->setOffsetX(372);
+        $shape_002_7_1->setOffsetY(510);
 
         // Set the dimensions and offsets for slide 2 Student QrCode 2
         $shape_002_8 = $slide_002->createRichTextShape();
         $shape_002_8->setHeight(600);
         $shape_002_8->setWidth(250);
         $shape_002_8->setOffsetX(525);
-        $shape_002_8->setOffsetY(490);
+        $shape_002_8->setOffsetY(470);
 
         $shape_002_8_1 = $slide_002->createRichTextShape();
         $shape_002_8_1->setHeight(600);
         $shape_002_8_1->setWidth(250);
-        $shape_002_8_1->setOffsetX(840);
-        $shape_002_8_1->setOffsetY(525);
+        $shape_002_8_1->setOffsetX(860);
+        $shape_002_8_1->setOffsetY(510);
 
         $shape_002_9 = $slide_002->createRichTextShape();
         $shape_002_9->setHeight(600);
@@ -355,41 +355,41 @@ class StudentController extends Controller
 
         // Set the text for slide 2 seria_number
         $shape_002_1_2 = $shape_002_1_2->createTextRun($student->seria);
-        $shape_002_1_2->getFont()->setSize(15);
+        $shape_002_1_2->getFont()->setSize(13);
         $shape_002_1_2->getFont()->setBold(true);
 
         // Set the text for slide 2 seria_number
         $shape_002_1_3 = $shape_002_1->createTextRun($student->seria_number);
-        $shape_002_1_3->getFont()->setSize(15);
+        $shape_002_1_3->getFont()->setSize(13);
         $shape_002_1_3->getFont()->setBold(true);
 
         // Set the text for slide 2 Progress 0
-        $shape_002_22 = $shape_002_2->createTextRun('Preseason Web 100%'); // $student->progress_0
-        $shape_002_22->getFont()->setSize(18);
+        $shape_002_22 = $shape_002_2->createTextRun('Preseason Web         100%'); // $student->progress_0
+        $shape_002_22->getFont()->setSize(17);
         $shape_002_22->getFont()->setColor(new Color('FF5430CE'));
         $shape_002_22->getFont()->setBold(true);
         // Set the text for slide 2 Progress 0 title
-        $shape_002_23 = $shape_002_2->createTextRun("(HTML, CSS, Javascript) (1 oy/mo.)");
+        $shape_002_23 = $shape_002_2->createTextRun("  (HTML, CSS, Javascript) (1 oy/mo.)");
         $shape_002_23->getFont()->setSize(10);
 
         // Set the text for slide 2 Progress 1
         if ($student->progress_1) {
             $shape_002_33 = $shape_002_3->createTextRun($student->progress_1);
-            $shape_002_33->getFont()->setSize(18);
+            $shape_002_33->getFont()->setSize(17);
             $shape_002_33->getFont()->setColor(new Color('FF5430CE'));
             $shape_002_33->getFont()->setBold(true);
             // Set the text for slide 2 Progress 1 title
-            $shape_002_33 = $shape_002_3->createTextRun("(C) (2 oy/mo.)");
+            $shape_002_33 = $shape_002_3->createTextRun("   (C) (2 oy/mo.)");
             $shape_002_33->getFont()->setSize(10);
         }
         // Set the text for slide 2 Progress 2
         if ($student->progress_2) {
             $shape_002_34 = $shape_002_4->createTextRun($student->progress_2);
-            $shape_002_34->getFont()->setSize(18);
+            $shape_002_34->getFont()->setSize(17);
             $shape_002_34->getFont()->setColor(new Color('FF5430CE'));
             $shape_002_34->getFont()->setBold(true);
             // Set the text for slide 2 Progress 2 title
-            $shape_002_34 = $shape_002_4->createTextRun("(Ruby, Javascript) (6 oy/mo.)");
+            $shape_002_34 = $shape_002_4->createTextRun("    (Ruby, Javascript) (6 oy/mo.)");
             $shape_002_34->getFont()->setSize(10);
         }
 
@@ -400,7 +400,7 @@ class StudentController extends Controller
             $shape_002_35->getFont()->setColor(new Color('FF5430CE'));
             $shape_002_35->getFont()->setBold(true);
             // Set the text for slide 2 Progress 2 title
-            $shape_002_351 = $shape_002_5->createTextRun("(Javascript) (2 oy/mo.)");
+            $shape_002_351 = $shape_002_5->createTextRun("    (Javascript) (2 oy/mo.)");
             $shape_002_351->getFont()->setSize(10);
             $shape_002_351->getFont()->setColor(new Color('FF5430CE'));
         }
@@ -411,7 +411,7 @@ class StudentController extends Controller
             $shape_002_36->getFont()->setColor(new Color('FF5430CE'));
             $shape_002_36->getFont()->setBold(true);
             // Set the text for slide 2 Progress 2 title
-            $shape_002_36 = $shape_002_6->createTextRun("(Ruby, Python, Javascript, Java) (2 oy/mo.)");
+            $shape_002_36 = $shape_002_6->createTextRun("      (Ruby, Python, Javascript, Java) (2 oy/mo.)");
             $shape_002_36->getFont()->setSize(10);
             $shape_002_36->getFont()->setColor(new Color('FF5430CE'));
         }
@@ -422,14 +422,14 @@ class StudentController extends Controller
             $shape_002_72 = $shape_002_7->createTextRun('Tamomlamagan / Not completed                          ');
             $shape_002_72->getFont()->setSize(25);
             $shape_002_71 = $shape_002_7_1->createTextRun('X');
-            $shape_002_71->getFont()->setSize(18);
+            $shape_002_71->getFont()->setSize(22);
         } else {
             // Start Advanced Frontend Development
             $studentCertificatName = $this->studentCertificatName($student->id);
 
             foreach ($studentCertificatName as $certificatName) {
                 if ($certificatName->certificate_name == "Advanced Frontend Development") {
-                    $shape_002_72 = $shape_002_7->createTextRun('FrontEnd dasturlash tushunchalarini o\'z ichiga olgan 50 ta mashqni va 4 ta loihani "ReactJS"da yakunladi');
+                    $shape_002_72 = $shape_002_7->createTextRun('Front End dasturlash tushunchalarini o\'z ichiga olgan 50 ta mashqni va 4 ta loihani "ReactJS"da yakunladi');
                     $shape_002_72->getFont()->setSize(15);
                     $shape_002_72->getFont()->setBold(true);
                 } else if ($certificatName->certificate_name == "Associate Data Scientist") {
@@ -452,7 +452,7 @@ class StudentController extends Controller
             $shape_002_73 = $shape_002_8->createTextRun('Tamomlamagan / Not completed                          ');
             $shape_002_73->getFont()->setSize(25);
             $shape_002_74 = $shape_002_8_1->createTextRun('X');
-            $shape_002_74->getFont()->setSize(18);
+            $shape_002_74->getFont()->setSize(22);
         } else {
             // Start Advanced Backend Development
             $studentCertificatName = $this->studentCertificatName($student->id);

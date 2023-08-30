@@ -130,8 +130,7 @@
                                 <p class="justify-end">{{ $s->certificate_date }}</p>
                             </div>
                             <div class="sm:flex justify-end">
-                                <input type="text" name="myvalue"  id="myvalue" value="{{ $s->certificate }}" readonly class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"/>
-                                <button class="btn btn-primary btn-block" onclick="copyToClipboard()">Copy</button>
+                                <input type="text" value="{{ $s->certificate }}" readonly class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"/>
                             </div>
                         </div>
                     @endforeach
@@ -139,11 +138,3 @@
             </div>
         </div>
 </x-app-layout>
-
-<script>
-    function copyToClipboard() {
-        var textBox = document.getElementById("myvalue");
-        textBox.select();
-        document.execCommand("copy");
-    }
-</script>
