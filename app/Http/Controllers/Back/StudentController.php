@@ -22,6 +22,7 @@ use PhpOffice\PhpPresentation\Style\Alignment;
 use PhpOffice\PhpPresentation\Shape\Drawing;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use PhpOffice\PhpPresentation\DocumentLayout;
+use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 
 class StudentController extends Controller
 {
@@ -191,38 +192,38 @@ class StudentController extends Controller
             ->setCY(17, DocumentLayout::UNIT_CENTIMETER);
 
         // Set the dimensions and offsets for slide 1 Student Full name
-        $shape_001 = $slide_001->createRichTextShape();
-        $shape_001->setHeight(600);
-        $shape_001->setWidth(1000);
-        $shape_001->setOffsetX(150);
-        $shape_001->setOffsetY(250);
+        $slide_full_name = $slide_001->createRichTextShape();
+        $slide_full_name->setHeight(100);
+        $slide_full_name->setWidth(600);
+        $slide_full_name->setOffsetX(230);
+        $slide_full_name->setOffsetY(270);
 
         // Set the dimensions and offsets for slide 1 Student Course
-        $shape_001_1 = $slide_001->createRichTextShape();
-        $shape_001_1->setHeight(600);
-        $shape_001_1->setWidth(400);
-        $shape_001_1->setOffsetX(370);
-        $shape_001_1->setOffsetY(460);
+        $slide_course = $slide_001->createRichTextShape();
+        $slide_course->setHeight(100);
+        $slide_course->setWidth(420);
+        $slide_course->setOffsetX(320);
+        $slide_course->setOffsetY(475);
 
         // Set the dimensions and offsets for slide 1 Student Data 
-        $shape_001_2 = $slide_001->createRichTextShape();
-        $shape_001_2->setHeight(600);
-        $shape_001_2->setWidth(600);
-        $shape_001_2->setOffsetX(422);
-        $shape_001_2->setOffsetY(570);
+        $slide_dateS = $slide_001->createRichTextShape();
+        $slide_dateS->setHeight(600);
+        $slide_dateS->setWidth(600);
+        $slide_dateS->setOffsetX(422);
+        $slide_dateS->setOffsetY(570);
 
         // Set the dimensions and offsets for slide 1 Student seria number
-        $shape_001_3 = $slide_001->createRichTextShape();
-        $shape_001_3->setHeight(600);
-        $shape_001_3->setWidth(600);
-        $shape_001_3->setOffsetX(263);
-        $shape_001_3->setOffsetY(570);
+        $slide_seria_number = $slide_001->createRichTextShape();
+        $slide_seria_number->setHeight(600);
+        $slide_seria_number->setWidth(600);
+        $slide_seria_number->setOffsetX(261);
+        $slide_seria_number->setOffsetY(570);
 
-        $shape_001_3_1 = $slide_001->createRichTextShape();
-        $shape_001_3_1->setHeight(600);
-        $shape_001_3_1->setWidth(600);
-        $shape_001_3_1->setOffsetX(245);
-        $shape_001_3_1->setOffsetY(570);
+        $slide_seria = $slide_001->createRichTextShape();
+        $slide_seria->setHeight(600);
+        $slide_seria->setWidth(600);
+        $slide_seria->setOffsetX(245);
+        $slide_seria->setOffsetY(570);
 
         // Set the background image for slide 1
         $background_001 = new Image();
@@ -230,212 +231,392 @@ class StudentController extends Controller
         $slide_001->setBackground($background_001);
 
         // Set the text for slide 1 
-        $textRun_001 = $shape_001->createTextRun($student->full_name);
-        $textRun_001->getFont()->setSize(40);
-        $textRun_001->getFont()->setColor(new Color('FF5430CE'));
+        $slide_full_name = $slide_full_name->createTextRun($student->full_name);
+        $slide_full_name->getFont()->setSize(28);
+        $slide_full_name->getFont()->setColor(new Color('FF5430CE'));
+        $slide_full_name->getFont()->setBold(true);
 
-        $shape_001_1 = $shape_001_1->createTextRun($student->course);
-        $shape_001_1->getFont()->setSize(35);
-        $shape_001_1->getFont()->setColor(new Color('FF5430CE'));
 
-        $shape_001_2 = $shape_001_2->createTextRun($dateS);
-        $shape_001_2->getFont()->setSize(13);
-        $shape_001_2->getFont()->setBold(true);
+        $slide_course = $slide_course->createTextRun($student->course);
+        $slide_course->getFont()->setSize(28);
+        $slide_course->getFont()->setColor(new Color('FF5430CE'));
+        $slide_course->getFont()->setBold(true);
 
-        $shape_001_3 = $shape_001_3->createTextRun($student->seria_number);
-        $shape_001_3->getFont()->setSize(13);
-        $shape_001_3->getFont()->setBold(true);
+        $slide_dateS = $slide_dateS->createTextRun($dateS);
+        $slide_dateS->getFont()->setSize(12);
+        $slide_dateS->getFont()->setBold(true);
 
-        $shape_001_4 = $shape_001_3_1->createTextRun($student->seria);
-        $shape_001_4->getFont()->setSize(13);
-        $shape_001_4->getFont()->setBold(true);
+        $slide_seria_number = $slide_seria_number->createTextRun($student->seria_number);
+        $slide_seria_number->getFont()->setSize(12);
+        $slide_seria_number->getFont()->setBold(true);
+
+        $slide_seria = $slide_seria->createTextRun($student->seria);
+        $slide_seria->getFont()->setSize(12);
+        $slide_seria->getFont()->setBold(true);
         // end the text for slide 1
+
+
 
 
 
         // Create slide 2
         $slide_002 = $presentation->createSlide();
-        $getActiveSlide = $presentation->getActiveSlide();
         // Set the dimensions and offsets for slide 2 Student full name
-        $shape_002 = $slide_002->createRichTextShape();
-        $shape_002->setHeight(600);
-        $shape_002->setWidth(1000);
-        $shape_002->setOffsetX(150);
-        $shape_002->setOffsetY(85);
+        $full_name = $slide_002->createRichTextShape();
+        $full_name->setHeight(50);
+        $full_name->setWidth(600);
+        $full_name->setOffsetX(250);
+        $full_name->setOffsetY(95);
 
         // Set the dimensions and offsets for slide 2 Student seria number
-        $shape_002_1 = $slide_002->createRichTextShape();
-        $shape_002_1->setHeight(600);
-        $shape_002_1->setWidth(1000);
-        $shape_002_1->setOffsetX(67);
-        $shape_002_1->setOffsetY(32);
+        $seria_number = $slide_002->createRichTextShape();
+        $seria_number->setHeight(20);
+        $seria_number->setWidth(100);
+        $seria_number->setOffsetX(65);
+        $seria_number->setOffsetY(32);
 
-        $shape_002_1_2 = $slide_002->createRichTextShape();
-        $shape_002_1_2->setHeight(600);
-        $shape_002_1_2->setWidth(1000);
-        $shape_002_1_2->setOffsetX(50);
-        $shape_002_1_2->setOffsetY(32);
-
-        // Set the dimensions and offsets for slide 2 Student Progress  0 top
-        $shape_002_2 = $slide_002->createRichTextShape();
-        $shape_002_2->setHeight(600);
-        $shape_002_2->setWidth(270);
-        $shape_002_2->setOffsetX(100);
-        $shape_002_2->setOffsetY(350);
-
-        // Set the dimensions and offsets for slide 2 Student Progress 1 top
-        $shape_002_3 = $slide_002->createRichTextShape();
-        $shape_002_3->setHeight(600);
-        $shape_002_3->setWidth(270);
-        $shape_002_3->setOffsetX(370);
-        $shape_002_3->setOffsetY(350);
-
-        // Set the dimensions and offsets for slide 2 Student Progress 3 top
-        $shape_002_4 = $slide_002->createRichTextShape();
-        $shape_002_4->setHeight(600);
-        $shape_002_4->setWidth(270);
-        $shape_002_4->setOffsetX(640);
-        $shape_002_4->setOffsetY(350);
-
-        // Set the dimensions and offsets for slide 2 Student Progress 4 bottom
-        $shape_002_5 = $slide_002->createRichTextShape();
-        $shape_002_5->setHeight(600);
-        $shape_002_5->setWidth(290);
-        $shape_002_5->setOffsetX(100);
-        $shape_002_5->setOffsetY(405);
-
-        // Set the dimensions and offsets for slide 2 Student Progress 5 bottom
-        $shape_002_6 = $slide_002->createRichTextShape();
-        $shape_002_6->setHeight(600);
-        $shape_002_6->setWidth(260);
-        $shape_002_6->setOffsetX(640);
-        $shape_002_6->setOffsetY(405);
+        $seria = $slide_002->createRichTextShape();
+        $seria->setHeight(20);
+        $seria->setWidth(100);
+        $seria->setOffsetX(50);
+        $seria->setOffsetY(32);
 
         // Set the dimensions and offsets for slide 2 Student QrCode 1
-        $shape_002_7 = $slide_002->createRichTextShape();
-        $shape_002_7->setHeight(600);
-        $shape_002_7->setWidth(250);
-        $shape_002_7->setOffsetX(50);
-        $shape_002_7->setOffsetY(470);
+        $completed = $slide_002->createRichTextShape();
+        $completed->setHeight(100);
+        $completed->setWidth(250);
+        $completed->setOffsetX(50);
+        $completed->setOffsetY(470);
 
-        $shape_002_7_1 = $slide_002->createRichTextShape();
-        $shape_002_7_1->setHeight(600);
-        $shape_002_7_1->setWidth(250);
-        $shape_002_7_1->setOffsetX(372);
-        $shape_002_7_1->setOffsetY(510);
+        $not_completed = $slide_002->createRichTextShape();
+        $not_completed->setHeight(100);
+        $not_completed->setWidth(250);
+        $not_completed->setOffsetX(50);
+        $not_completed->setOffsetY(470);
+
+        $not_completed_x = $slide_002->createRichTextShape();
+        $not_completed_x->setHeight(600);
+        $not_completed_x->setWidth(250);
+        $not_completed_x->setOffsetX(372);
+        $not_completed_x->setOffsetY(510);
+
 
         // Set the dimensions and offsets for slide 2 Student QrCode 2
-        $shape_002_8 = $slide_002->createRichTextShape();
-        $shape_002_8->setHeight(600);
-        $shape_002_8->setWidth(250);
-        $shape_002_8->setOffsetX(525);
-        $shape_002_8->setOffsetY(470);
+        $completed_2 = $slide_002->createRichTextShape();
+        $completed_2->setHeight(100);
+        $completed_2->setWidth(250);
+        $completed_2->setOffsetX(525);
+        $completed_2->setOffsetY(470);
 
-        $shape_002_8_1 = $slide_002->createRichTextShape();
-        $shape_002_8_1->setHeight(600);
-        $shape_002_8_1->setWidth(250);
-        $shape_002_8_1->setOffsetX(860);
-        $shape_002_8_1->setOffsetY(510);
+        $not_completed_2 = $slide_002->createRichTextShape();
+        $not_completed_2->setHeight(100);
+        $not_completed_2->setWidth(250);
+        $not_completed_2->setOffsetX(525);
+        $not_completed_2->setOffsetY(470);
 
-        $shape_002_9 = $slide_002->createRichTextShape();
-        $shape_002_9->setHeight(600);
-        $shape_002_9->setWidth(250);
-        $shape_002_9->setOffsetX(840);
-        $shape_002_9->setOffsetY(525);
-
-        // Set the background image for slide 2
-        $background_002 = new Image();
-        $background_002->setPath(storage_path('img/sertificat002.png'));
-        $slide_002->setBackground($background_002);
+        $not_completed_2_x = $slide_002->createRichTextShape();
+        $not_completed_2_x->setHeight(600);
+        $not_completed_2_x->setWidth(250);
+        $not_completed_2_x->setOffsetX(860);
+        $not_completed_2_x->setOffsetY(510);
 
         // Set the text for slide 2 full_name
-        $textRun_002 = $shape_002->createTextRun($student->full_name);
-        $textRun_002->getFont()->setSize(40);
-        $textRun_002->getFont()->setColor(new Color('FF5430CE'));
+        $full_name = $full_name->createTextRun($student->full_name);
+        $full_name->getFont()->setSize(28);
+        $full_name->getFont()->setColor(new Color('FF5430CE'));
 
-        // Set the text for slide 2 seria_number
-        $shape_002_1_2 = $shape_002_1_2->createTextRun($student->seria);
-        $shape_002_1_2->getFont()->setSize(13);
-        $shape_002_1_2->getFont()->setBold(true);
+        $seria = $seria->createTextRun($student->seria);
+        $seria->getFont()->setSize(12);
+        $seria->getFont()->setBold(true);
 
-        // Set the text for slide 2 seria_number
-        $shape_002_1_3 = $shape_002_1->createTextRun($student->seria_number);
-        $shape_002_1_3->getFont()->setSize(13);
-        $shape_002_1_3->getFont()->setBold(true);
+        $seria_number = $seria_number->createTextRun($student->seria_number);
+        $seria_number->getFont()->setSize(12);
+        $seria_number->getFont()->setBold(true);
 
-        // Set the text for slide 2 Progress 0
-        $shape_002_22 = $shape_002_2->createTextRun('Preseason Web         100%'); // $student->progress_0
-        $shape_002_22->getFont()->setSize(17);
-        $shape_002_22->getFont()->setColor(new Color('FF5430CE'));
-        $shape_002_22->getFont()->setBold(true);
-        // Set the text for slide 2 Progress 0 title
-        $shape_002_23 = $shape_002_2->createTextRun("  (HTML, CSS, Javascript) (1 oy/mo.)");
-        $shape_002_23->getFont()->setSize(10);
+        // Set the background image for slide 2
+        if ($student->course == "DATA SCIENCE") {
 
-        // Set the text for slide 2 Progress 1
-        if ($student->progress_1) {
-            $shape_002_33 = $shape_002_3->createTextRun($student->progress_1);
-            $shape_002_33->getFont()->setSize(17);
-            $shape_002_33->getFont()->setColor(new Color('FF5430CE'));
-            $shape_002_33->getFont()->setBold(true);
-            // Set the text for slide 2 Progress 1 title
-            $shape_002_33 = $shape_002_3->createTextRun("   (C) (2 oy/mo.)");
-            $shape_002_33->getFont()->setSize(10);
+            // Set the text for slide 2 Progress 0
+            $ds_progress_0 = $slide_002->createRichTextShape();
+            $ds_progress_0->setHeight(50);
+            $ds_progress_0->setWidth(100);
+            $ds_progress_0->setOffsetX(300);
+            $ds_progress_0->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 1
+            $ds_progress_1 = $slide_002->createRichTextShape();
+            $ds_progress_1->setHeight(50);
+            $ds_progress_1->setWidth(100);
+            $ds_progress_1->setOffsetX(560);
+            $ds_progress_1->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 2
+            $ds_progress_2 = $slide_002->createRichTextShape();
+            $ds_progress_2->setHeight(50);
+            $ds_progress_2->setWidth(100);
+            $ds_progress_2->setOffsetX(850);
+            $ds_progress_2->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 3
+            $ds_progress_3 = $slide_002->createRichTextShape();
+            $ds_progress_3->setHeight(50);
+            $ds_progress_3->setWidth(100);
+            $ds_progress_3->setOffsetX(350);
+            $ds_progress_3->setOffsetY(415);
+
+            $background_002 = new Image();
+            $background_002->setPath(storage_path('img/DATA_SCIENCE_2.png'));
+            $slide_002->setBackground($background_002);
+
+            // Set the text for slide 2 Progress 0
+            $progress_0 = substr($student->progress_0, -4);
+            $ds_progress_0 = $ds_progress_0->createTextRun($progress_0);
+            $ds_progress_0->getFont()->setSize(14);
+            $ds_progress_0->getFont()->setBold(true);
+
+            // Set the text for slide 2 Progress 1
+            if ($student->progress_1) {
+                $progress_1 = substr($student->progress_1, -4);
+                $ds_progress_1 = $ds_progress_1->createTextRun($progress_1);
+                $ds_progress_1->getFont()->setSize(14);
+                $ds_progress_1->getFont()->setBold(true);
+            } else {
+                $progress_1 = substr($student->progress_1, -4);
+                $ds_progress_1 = $ds_progress_1->createTextRun("0%");
+                $ds_progress_1->getFont()->setSize(14);
+                $ds_progress_1->getFont()->setBold(true);
+            }
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_2) {
+                $progress_2 = substr($student->progress_2, -4);
+                $ds_progress_2 = $ds_progress_2->createTextRun($progress_2);
+                $ds_progress_2->getFont()->setSize(14);
+                $ds_progress_2->getFont()->setBold(true);
+            } else {
+                $ds_progress_2 = $ds_progress_2->createTextRun("0%");
+                $ds_progress_2->getFont()->setSize(14);
+                $ds_progress_2->getFont()->setBold(true);
+            }
+
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_3) {
+                $progress_3 = substr($student->progress_3, -4);
+                $ds_progress_3 = $ds_progress_3->createTextRun($progress_3);
+                $ds_progress_3->getFont()->setSize(14);
+                $ds_progress_3->getFont()->setBold(true);
+            } else {
+                $ds_progress_3 = $ds_progress_3->createTextRun("0%");
+                $ds_progress_3->getFont()->setSize(14);
+                $ds_progress_3->getFont()->setBold(true);
+            }
+        } else if ($student->course == "SOFTWARE ENGINEERING") {
+
+            // Set the text for slide 2 Progress 0
+            $se_progress_0 = $slide_002->createRichTextShape();
+            $se_progress_0->setHeight(50);
+            $se_progress_0->setWidth(100);
+            $se_progress_0->setOffsetX(300);
+            $se_progress_0->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 1
+            $se_progress_1 = $slide_002->createRichTextShape();
+            $se_progress_1->setHeight(50);
+            $se_progress_1->setWidth(100);
+            $se_progress_1->setOffsetX(560);
+            $se_progress_1->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 2
+            $se_progress_2 = $slide_002->createRichTextShape();
+            $se_progress_2->setHeight(50);
+            $se_progress_2->setWidth(100);
+            $se_progress_2->setOffsetX(850);
+            $se_progress_2->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 3
+            $se_progress_3 = $slide_002->createRichTextShape();
+            $se_progress_3->setHeight(50);
+            $se_progress_3->setWidth(100);
+            $se_progress_3->setOffsetX(350);
+            $se_progress_3->setOffsetY(415);
+
+            // Set the text for slide 2 Progress 4
+            $se_progress_4 = $slide_002->createRichTextShape();
+            $se_progress_4->setHeight(50);
+            $se_progress_4->setWidth(100);
+            $se_progress_4->setOffsetX(840);
+            $se_progress_4->setOffsetY(420);
+
+            $background_002 = new Image();
+            $background_002->setPath(storage_path('img/SOFTWARE_ENGINEERING_2.png'));
+            $slide_002->setBackground($background_002);
+
+            // Set the text for slide 2 Progress 0
+            $progress_0 = substr($student->progress_0, -4);
+            $shape_002_22 = $se_progress_0->createTextRun($progress_0); // $student->progress_0
+            $shape_002_22->getFont()->setSize(14);
+            $shape_002_22->getFont()->setBold(true);
+
+            // Set the text for slide 2 Progress 1
+            if ($student->progress_1) {
+                $progress_1 = substr($student->progress_1, -4);
+                $se_progress_1 = $se_progress_1->createTextRun($progress_1);
+                $se_progress_1->getFont()->setSize(14);
+                $se_progress_1->getFont()->setBold(true);
+            } else {
+                $se_progress_1 = $se_progress_1->createTextRun("0%");
+                $se_progress_1->getFont()->setSize(14);
+                $se_progress_1->getFont()->setBold(true);
+            }
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_2) {
+                $progress_2 = substr($student->progress_2, -4);
+                $se_progress_2 = $se_progress_2->createTextRun($progress_2);
+                $se_progress_2->getFont()->setSize(14);
+                $se_progress_2->getFont()->setBold(true);
+            } else {
+                $se_progress_2 = $se_progress_2->createTextRun("0%");
+                $se_progress_2->getFont()->setSize(14);
+                $se_progress_2->getFont()->setBold(true);
+            }
+
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_3) {
+                $progress_3 = substr($student->progress_3, -4);
+                $se_progress_3 = $se_progress_3->createTextRun($progress_3);
+                $se_progress_3->getFont()->setSize(14);
+                $se_progress_3->getFont()->setBold(true);
+            } else {
+                $se_progress_3 = $se_progress_3->createTextRun("0%");
+                $se_progress_3->getFont()->setSize(14);
+                $se_progress_3->getFont()->setBold(true);
+            }
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_4) {
+                $progress_4 = substr($student->progress_4, -4);
+                $se_progress_4 = $se_progress_4->createTextRun($progress_4);
+                $se_progress_4->getFont()->setSize(14);
+                $se_progress_4->getFont()->setBold(true);
+            } else {
+                $se_progress_4 = $se_progress_4->createTextRun("0%");
+                $se_progress_4->getFont()->setSize(14);
+                $se_progress_4->getFont()->setBold(true);
+            }
+        } else {
+
+            // Set the text for slide 2 Progress 0
+            $fs_progress_0 = $slide_002->createRichTextShape();
+            $fs_progress_0->setHeight(50);
+            $fs_progress_0->setWidth(100);
+            $fs_progress_0->setOffsetX(300);
+            $fs_progress_0->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 1
+            $fs_progress_1 = $slide_002->createRichTextShape();
+            $fs_progress_1->setHeight(50);
+            $fs_progress_1->setWidth(100);
+            $fs_progress_1->setOffsetX(560);
+            $fs_progress_1->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 2
+            $fs_progress_2 = $slide_002->createRichTextShape();
+            $fs_progress_2->setHeight(50);
+            $fs_progress_2->setWidth(100);
+            $fs_progress_2->setOffsetX(850);
+            $fs_progress_2->setOffsetY(360);
+
+            // Set the text for slide 2 Progress 4
+            $fs_progress_3 = $slide_002->createRichTextShape();
+            $fs_progress_3->setHeight(50);
+            $fs_progress_3->setWidth(100);
+            $fs_progress_3->setOffsetX(350);
+            $fs_progress_3->setOffsetY(415);
+
+            // Set the text for slide 2 Progress 5
+            $fs_progress_4 = $slide_002->createRichTextShape();
+            $fs_progress_4->setHeight(50);
+            $fs_progress_4->setWidth(100);
+            $fs_progress_4->setOffsetX(840);
+            $fs_progress_4->setOffsetY(420);
+
+            $background_002 = new Image();
+            $background_002->setPath(storage_path('img/FULLSTACK_DEVELOPER_2.png'));
+            $slide_002->setBackground($background_002);
+
+            // Set the text for slide 2 Progress 0
+            $progress_0 = substr($student->progress_0, -4);
+            $fs_progress_0 = $fs_progress_0->createTextRun($progress_0); // $student->progress_0
+            $fs_progress_0->getFont()->setSize(14);
+            $fs_progress_0->getFont()->setBold(true);
+
+            // Set the text for slide 2 Progress 1
+            if ($student->progress_1) {
+                $progress_1 = substr($student->progress_1, -4);
+                $fs_progress_1 = $fs_progress_1->createTextRun($progress_1);
+                $fs_progress_1->getFont()->setSize(14);
+                $fs_progress_1->getFont()->setBold(true);
+            } else {
+                $fs_progress_1 = $fs_progress_1->createTextRun("0%");
+                $fs_progress_1->getFont()->setSize(14);
+                $fs_progress_1->getFont()->setBold(true);
+            }
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_2) {
+                $progress_2 = substr($student->progress_2, -4);
+                $fs_progress_2 = $fs_progress_2->createTextRun($progress_2);
+                $fs_progress_2->getFont()->setSize(14);
+                $fs_progress_2->getFont()->setBold(true);
+            } else {
+                $fs_progress_2 = $fs_progress_2->createTextRun("0%");
+                $fs_progress_2->getFont()->setSize(14);
+                $fs_progress_2->getFont()->setBold(true);
+            }
+
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_3) {
+                $progress_3 = substr($student->progress_3, -4);
+                $fs_progress_3 = $fs_progress_3->createTextRun($progress_3);
+                $fs_progress_3->getFont()->setSize(14);
+                $fs_progress_3->getFont()->setBold(true);
+            } else {
+                $fs_progress_3 = $fs_progress_3->createTextRun("0%");
+                $fs_progress_3->getFont()->setSize(14);
+                $fs_progress_3->getFont()->setBold(true);
+            }
+            // Set the text for slide 2 Progress 2
+            if ($student->progress_4) {
+                $progress_4 = substr($student->progress_4, -4);
+                $fs_progress_4 = $fs_progress_4->createTextRun($progress_4);
+                $fs_progress_4->getFont()->setSize(14);
+                $fs_progress_4->getFont()->setBold(true);
+            } else {
+                $fs_progress_4 = $fs_progress_4->createTextRun("0%");
+                $fs_progress_4->getFont()->setSize(14);
+                $fs_progress_4->getFont()->setBold(true);
+            }
         }
-        // Set the text for slide 2 Progress 2
-        if ($student->progress_2) {
-            $shape_002_34 = $shape_002_4->createTextRun($student->progress_2);
-            $shape_002_34->getFont()->setSize(17);
-            $shape_002_34->getFont()->setColor(new Color('FF5430CE'));
-            $shape_002_34->getFont()->setBold(true);
-            // Set the text for slide 2 Progress 2 title
-            $shape_002_34 = $shape_002_4->createTextRun("    (Ruby, Javascript) (6 oy/mo.)");
-            $shape_002_34->getFont()->setSize(10);
-        }
 
         // Set the text for slide 2 Progress 2
-        if ($student->progress_3) {
-            $shape_002_35 = $shape_002_5->createTextRun($student->progress_3);
-            $shape_002_35->getFont()->setSize(15);
-            $shape_002_35->getFont()->setColor(new Color('FF5430CE'));
-            $shape_002_35->getFont()->setBold(true);
-            // Set the text for slide 2 Progress 2 title
-            $shape_002_351 = $shape_002_5->createTextRun("    (Javascript) (2 oy/mo.)");
-            $shape_002_351->getFont()->setSize(10);
-            $shape_002_351->getFont()->setColor(new Color('FF5430CE'));
-        }
-        // Set the text for slide 2 Progress 2
-        if ($student->progress_4) {
-            $shape_002_36 = $shape_002_6->createTextRun($student->progress_4);
-            $shape_002_36->getFont()->setSize(15);
-            $shape_002_36->getFont()->setColor(new Color('FF5430CE'));
-            $shape_002_36->getFont()->setBold(true);
-            // Set the text for slide 2 Progress 2 title
-            $shape_002_36 = $shape_002_6->createTextRun("      (Ruby, Python, Javascript, Java) (2 oy/mo.)");
-            $shape_002_36->getFont()->setSize(10);
-            $shape_002_36->getFont()->setColor(new Color('FF5430CE'));
-        }
-
-        // Set the text for slide 2 Progress 2
-        // $student->sertificat_1, $student->sertificat_2
         if ($student->sertificat_1 == null) {
-            $shape_002_72 = $shape_002_7->createTextRun('Tamomlamagan / Not completed                          ');
-            $shape_002_72->getFont()->setSize(25);
-            $shape_002_71 = $shape_002_7_1->createTextRun('X');
-            $shape_002_71->getFont()->setSize(22);
+            $not_completed = $not_completed->createTextRun('Tamomlamagan / Not completed');
+            $not_completed->getFont()->setSize(14);
+            $not_completed->getFont()->setBold(true);
+
+            $not_completed_x = $not_completed_x->createTextRun('X');
+            $not_completed_x->getFont()->setSize(20);
+            $not_completed_x->getFont()->setBold(true);
         } else {
             // Start Advanced Frontend Development
             $studentCertificatName = $this->studentCertificatName($student->id);
 
             foreach ($studentCertificatName as $certificatName) {
                 if ($certificatName->certificate_name == "Advanced Frontend Development") {
-                    $shape_002_72 = $shape_002_7->createTextRun('Front End dasturlash tushunchalarini o\'z ichiga olgan 50 ta mashqni va 4 ta loihani "ReactJS"da yakunladi');
-                    $shape_002_72->getFont()->setSize(15);
-                    $shape_002_72->getFont()->setBold(true);
+                    $completed = $completed->createTextRun('Front End dasturlash tushunchalarini o\'z ichiga olgan 50 ta mashqni va 4 ta loihani "ReactJS"da yakunladi');
+                    $completed->getFont()->setSize(14);
+                    $completed->getFont()->setBold(true);
                 } else if ($certificatName->certificate_name == "Associate Data Scientist") {
-                    $shape_002_72 = $shape_002_7->createTextRun('Python dasturlash tilida Data Science asoslarini o\'z ichiga olgan 20 ta mashqni va 14 loyihani to\'liq yakunladi');
-                    $shape_002_72->getFont()->setSize(15);
-                    $shape_002_72->getFont()->setBold(true);
+                    $completed = $completed->createTextRun('Python dasturlash tilida Data Science asoslarini o\'z ichiga olgan 20 ta mashqni va 14 loyihani to\'liq yakunladi');
+                    $completed->getFont()->setSize(14);
+                    $completed->getFont()->setBold(true);
                 }
             }
             // End Advanced Frontend Development
@@ -449,23 +630,25 @@ class StudentController extends Controller
         }
 
         if ($student->sertificat_2 == null) {
-            $shape_002_73 = $shape_002_8->createTextRun('Tamomlamagan / Not completed                          ');
-            $shape_002_73->getFont()->setSize(25);
-            $shape_002_74 = $shape_002_8_1->createTextRun('X');
-            $shape_002_74->getFont()->setSize(22);
+            $not_completed_2 = $not_completed_2->createTextRun('Tamomlamagan / Not completed                          ');
+            $not_completed_2->getFont()->setSize(14);
+            $not_completed_2->getFont()->setBold(true);
+            $not_completed_2_x = $not_completed_2_x->createTextRun('X');
+            $not_completed_2_x->getFont()->setSize(20);
+            $not_completed_2_x->getFont()->setBold(true);
         } else {
             // Start Advanced Backend Development
             $studentCertificatName = $this->studentCertificatName($student->id);
 
             foreach ($studentCertificatName as $certificatName) {
                 if ($certificatName->certificate_name == "Advanced Backend Development") {
-                    $shape_002_73 = $shape_002_8->createTextRun('Backend dasturlash tushunchalarini o\'z ichiga olgan 4 ta loyihani to\'liq yakunladi');
-                    $shape_002_73->getFont()->setSize(15);
-                    $shape_002_73->getFont()->setBold(true);
+                    $completed_2 = $completed_2->createTextRun('Backend dasturlash tushunchalarini o\'z ichiga olgan 4 ta loyihani to\'liq yakunladi');
+                    $completed_2->getFont()->setSize(14);
+                    $completed_2->getFont()->setBold(true);
                 } else if ($certificatName->certificate_name == "Associate Data Scientist") {
-                    $shape_002_73 = $shape_002_8->createTextRun('Python dasturlash tilida Data Science asoslarini o\'z ichiga olgan 20 ta mashqni va 14 loyihani to\'liq yakunladi');
-                    $shape_002_73->getFont()->setSize(15);
-                    $shape_002_73->getFont()->setBold(true);
+                    $completed_2 = $completed_2->createTextRun('Python dasturlash tilida Data Science asoslarini o\'z ichiga olgan 20 ta mashqni va 14 loyihani to\'liq yakunladi');
+                    $completed_2->getFont()->setSize(14);
+                    $completed_2->getFont()->setBold(true);
                 }
             }
             // End Advanced Backend Development
@@ -476,14 +659,6 @@ class StudentController extends Controller
                 ->setOffsetY(475);
             $slide_002->addShape($qrCodeImg);
         }
-
-        // Set the alignment for slide 1
-        $paragraph_001 = $shape_001->getActiveParagraph();
-        $paragraph_001->setAlignment(new Alignment(Alignment::HORIZONTAL_RIGHT, Alignment::VERTICAL_AUTO));
-
-        // Set the alignment for slide 2
-        $paragraph_002 = $shape_002->getActiveParagraph();
-        $paragraph_002->setAlignment(new Alignment(Alignment::HORIZONTAL_RIGHT, Alignment::VERTICAL_AUTO));
 
         return $presentation;
     }
@@ -511,7 +686,6 @@ class StudentController extends Controller
 
         return redirect()->route('students.index');
     }
-
 
     /**
      * Remove the specified resource from storage.

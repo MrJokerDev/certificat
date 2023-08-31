@@ -84,6 +84,8 @@ class QwasarParseJob implements ShouldQueue
                 }
             });
 
+            $students = array_reverse($students);
+
             if ($userFind) {
                 Student::where('nik_name', $userFind->nik_name)->update([
                     'progress_0' => isset($students[0]) ? $students[0] : null,

@@ -60,11 +60,11 @@
                             <label for="countries" class="mb-3 block text-base font-medium text-[#07074D]">Select an courses</label>
                             <select id="course" name="course" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">      
                                 <option selected>Choose a course</option>
-                                <option value="Full_Stack" {{ ( 'Full Stack' == $student->course) ? 'selected' : '' }}>Full Stack</option>
-                                <option value="Back_End" {{ ( 'Back End' == $student->course) ? 'selected' : '' }}>Back End</option>
-                                <option value="Front_End" {{ ( 'Front End' == $student->course) ? 'selected' : '' }}>Front End</option>
-                                <option value="Data_Science" {{ ( 'Data Science' == $student->course) ? 'selected' : '' }}>Data Science</option>
-                                <option value="Software_Engineering" {{ ( 'Software Engineering' == $student->course) ? 'selected' : '' }}>Software Engineering</option>
+                                <option value="FULL_STACK_DEVELOPER" {{ ( 'FULL STACK DEVELOPER' == $student->course) ? 'selected' : '' }}>FULL STACK DEVELOPER</option>
+                                <option value="BACKEND_DEVELOPER" {{ ( 'BACKEND DEVELOPER' == $student->course) ? 'selected' : '' }}>BACKEND DEVELOPER</option>
+                                <option value="FRONTEND_DEVELOPER" {{ ( 'FRONTEND DEVELOPER' == $student->course) ? 'selected' : '' }}>FRONTEND DEVELOPER</option>
+                                <option value="DATA_SCIENCE" {{ ( 'DATA SCIENCE' == $student->course) ? 'selected' : '' }}>DATA SCIENCE</option>
+                                <option value="SOFTWARE_ENGINEERING" {{ ( 'SOFTWARE ENGINEERING' == $student->course) ? 'selected' : '' }}>SOFTWARE ENGINEERING</option>
                             </select>
                         </div>
                         <div class="mb-5">
