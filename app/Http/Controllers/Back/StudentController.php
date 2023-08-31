@@ -340,28 +340,28 @@ class StudentController extends Controller
             $ds_progress_0 = $slide_002->createRichTextShape();
             $ds_progress_0->setHeight(50);
             $ds_progress_0->setWidth(100);
-            $ds_progress_0->setOffsetX(300);
+            $ds_progress_0->setOffsetX(350);
             $ds_progress_0->setOffsetY(360);
 
             // Set the text for slide 2 Progress 1
             $ds_progress_1 = $slide_002->createRichTextShape();
             $ds_progress_1->setHeight(50);
             $ds_progress_1->setWidth(100);
-            $ds_progress_1->setOffsetX(560);
+            $ds_progress_1->setOffsetX(850);
             $ds_progress_1->setOffsetY(360);
 
             // Set the text for slide 2 Progress 2
             $ds_progress_2 = $slide_002->createRichTextShape();
             $ds_progress_2->setHeight(50);
             $ds_progress_2->setWidth(100);
-            $ds_progress_2->setOffsetX(850);
-            $ds_progress_2->setOffsetY(360);
+            $ds_progress_2->setOffsetX(350);
+            $ds_progress_2->setOffsetY(415);
 
             // Set the text for slide 2 Progress 3
             $ds_progress_3 = $slide_002->createRichTextShape();
             $ds_progress_3->setHeight(50);
             $ds_progress_3->setWidth(100);
-            $ds_progress_3->setOffsetX(350);
+            $ds_progress_3->setOffsetX(850);
             $ds_progress_3->setOffsetY(415);
 
             $background_002 = new Image();
@@ -501,7 +501,7 @@ class StudentController extends Controller
                 $se_progress_4->getFont()->setSize(14);
                 $se_progress_4->getFont()->setBold(true);
             }
-        } else {
+        } else if ($student->course == "FULL STACK DEVELOPER") {
 
             // Set the text for slide 2 Progress 0
             $fs_progress_0 = $slide_002->createRichTextShape();
