@@ -18,11 +18,10 @@ use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpPresentation\PhpPresentation;
 use PhpOffice\PhpPresentation\Slide\Background\Image;
 use PhpOffice\PhpPresentation\Style\Color;
-use PhpOffice\PhpPresentation\Style\Alignment;
 use PhpOffice\PhpPresentation\Shape\Drawing;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use PhpOffice\PhpPresentation\DocumentLayout;
-use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
+use PhpOffice\PhpPresentation\Style\Alignment;
 
 class StudentController extends Controller
 {
@@ -42,10 +41,11 @@ class StudentController extends Controller
         foreach ($students_db as $student) {
             $qrcode = $this->qrCodeGenerateStudent($student->sertificat_1, $student->sertificat_2);
 
-            $student_fullName = str_replace(' ', '', $student->full_name);
-            $student_fullName = str_replace("'", '', $student_fullName);
+            $student_fullName = str_replace(["'", " ", "`", "?", ",", "!", "@", "#", "$", "%", "^", "&", "*", "."], '', $student->full_name);
+
 
             if (!Storage::exists('qrcode/students/1/' . $student_fullName . '.png') || !Storage::exists('qrcode/students/2/' . $student_fullName . '.png')) {
+
                 if ($qrcode['sertificat_1'] !== "X") {
                     $qrcode_1 = 'qrcode/students/1/' . $student_fullName . '.png';
                     Storage::disk('local')->put($qrcode_1, $qrcode['sertificat_1']);
@@ -178,8 +178,7 @@ class StudentController extends Controller
 
     protected function generatePresentation($student)
     {
-        $student_fullName = str_replace(' ', '', $student->full_name);
-        $student_fullName = str_replace("'", '', $student_fullName);
+        $student_fullName = str_replace(["'", " ", "`", "?", ",", "!", "@", "#", "$", "%", "^", "&", "*", "."], '', $student->full_name);
 
         $dateS = date('d.m.Y', strtotime($student->date_of_issue));
         $presentation = new PhpPresentation();
@@ -195,14 +194,14 @@ class StudentController extends Controller
         $slide_full_name = $slide_001->createRichTextShape();
         $slide_full_name->setHeight(100);
         $slide_full_name->setWidth(600);
-        $slide_full_name->setOffsetX(230);
+        $slide_full_name->setOffsetX(200);
         $slide_full_name->setOffsetY(270);
 
         // Set the dimensions and offsets for slide 1 Student Course
         $slide_course = $slide_001->createRichTextShape();
         $slide_course->setHeight(100);
         $slide_course->setWidth(420);
-        $slide_course->setOffsetX(320);
+        $slide_course->setOffsetX(290);
         $slide_course->setOffsetY(475);
 
         // Set the dimensions and offsets for slide 1 Student Data 
@@ -225,6 +224,12 @@ class StudentController extends Controller
         $slide_seria->setOffsetX(245);
         $slide_seria->setOffsetY(570);
 
+        $alignment = new Alignment();
+        $alignment->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        $slide_course->getActiveParagraph()->setAlignment($alignment);
+        $slide_full_name->getActiveParagraph()->setAlignment($alignment);
+
         // Set the background image for slide 1
         $background_001 = new Image();
         $background_001->setPath(storage_path('img/sertificat001.png'));
@@ -236,11 +241,11 @@ class StudentController extends Controller
         $slide_full_name->getFont()->setColor(new Color('FF5430CE'));
         $slide_full_name->getFont()->setBold(true);
 
-
         $slide_course = $slide_course->createTextRun($student->course);
         $slide_course->getFont()->setSize(28);
         $slide_course->getFont()->setColor(new Color('FF5430CE'));
         $slide_course->getFont()->setBold(true);
+
 
         $slide_dateS = $slide_dateS->createTextRun($dateS);
         $slide_dateS->getFont()->setSize(12);
@@ -265,7 +270,7 @@ class StudentController extends Controller
         $full_name = $slide_002->createRichTextShape();
         $full_name->setHeight(50);
         $full_name->setWidth(600);
-        $full_name->setOffsetX(250);
+        $full_name->setOffsetX(200);
         $full_name->setOffsetY(95);
 
         // Set the dimensions and offsets for slide 2 Student seria number
@@ -319,6 +324,8 @@ class StudentController extends Controller
         $not_completed_2_x->setWidth(250);
         $not_completed_2_x->setOffsetX(860);
         $not_completed_2_x->setOffsetY(510);
+
+        $full_name->getActiveParagraph()->setAlignment($alignment);
 
         // Set the text for slide 2 full_name
         $full_name = $full_name->createTextRun($student->full_name);
@@ -668,8 +675,8 @@ class StudentController extends Controller
         $student = Student::where('id', $id)->first();
 
         $presentation = $this->generatePresentation($student);
-        $student_fullName =  str_replace(' ', '', $student->full_name);
-        $student_fullName = str_replace("'", '', $student_fullName);
+        $student_fullName =  str_replace(["'", " ", "`", "?", ",", "!", "@", "#", "$", "%", "^", "&", "*", "."], '', $student->full_name);
+
         $fileName = $student_fullName . '.pptx';
 
         $filePath = 'certificats/students/' . $fileName;
@@ -678,13 +685,17 @@ class StudentController extends Controller
         $tempFilePath = tempnam(sys_get_temp_dir(), 'pptx');
         $writer->save($tempFilePath);
 
-        Storage::disk('public')->put($filePath, file_get_contents($tempFilePath));
+        $fileContents = file_get_contents($tempFilePath);
 
         if (Storage::disk('public')->exists($filePath)) {
-            return Storage::disk('public')->download($filePath, $fileName);
+            // Update the existing file
+            Storage::disk('public')->put($filePath, $fileContents);
+        } else {
+            // Create a new file
+            Storage::disk('public')->put($filePath, $fileContents);
         }
 
-        return redirect()->route('students.index');
+        return Storage::disk('public')->download($filePath, $fileName);
     }
 
     /**

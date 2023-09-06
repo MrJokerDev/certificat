@@ -36,8 +36,7 @@ class TeacherController extends Controller
             $qrcode = $this->qrCodeGenerateStudent(env('APP_URL') . "/student/" . $teacher->seria . $teacher->seria_number);
 
             $fullName = $teacher->ism . ' ' . $teacher->familiya . ' ' . $teacher->sharif;
-            $teacher_fullName = str_replace(' ', '', $fullName);
-            $teacher_fullName = str_replace("'", '', $teacher_fullName);
+            $teacher_fullName = str_replace(["'", " ", "`", "?", ",", "!", "@", "#", "$", "%", "^", "&", "*", "."], '', $fullName);
 
             if (!Storage::exists('qrcode/teachers/' . $teacher_fullName . '.png')) {
                 $qrcode_img = 'qrcode/teachers/' . $teacher_fullName . '.png';
@@ -450,8 +449,8 @@ class TeacherController extends Controller
         $teacherFull_name = $teacher->ism . $teacher->familiya . $teacher->sharif;
 
         $presentation = $this->generatePresentation($teacher);
-        $student_fullName =  str_replace(' ', '', $teacherFull_name);
-        $student_fullName =  str_replace("'", '', $student_fullName);
+        $student_fullName =  str_replace(["'", " ", "`", "?", ",", "!", "@", "#", "$", "%", "^", "&", "*", "."], '', $teacherFull_name);
+
         $fileName = $student_fullName . '.pptx';
 
         $filePath = 'certificats/teachers/' . $fileName;
@@ -468,13 +467,17 @@ class TeacherController extends Controller
         $tempFilePath = tempnam(sys_get_temp_dir(), 'pptx');
         $writer->save($tempFilePath);
 
-        Storage::disk('public')->put($filePath, file_get_contents($tempFilePath));
+        $fileContents = file_get_contents($tempFilePath);
 
         if (Storage::disk('public')->exists($filePath)) {
-            return Storage::disk('public')->download($filePath, $fileName);
+            // Update the existing file
+            Storage::disk('public')->put($filePath, $fileContents);
+        } else {
+            // Create a new file
+            Storage::disk('public')->put($filePath, $fileContents);
         }
 
-        return redirect()->route('teachers.index');
+        return Storage::disk('public')->download($filePath, $fileName);
     }
 
     public function downloadExcelExample(Request $request)
