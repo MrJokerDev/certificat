@@ -157,8 +157,10 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teacher $teacher)
+    public function destroy(Teacher $teacher, Request $request)
     {
+
+
         $teacherCertificat = TeacherCertificat::where('teacher_id', $teacher->id)->first();
         $teacher = Teacher::where('id', $teacher->id)->first();
 
@@ -175,6 +177,18 @@ class TeacherController extends Controller
 
 
         return redirect()->route('teachers.index')->with('success', 'Teacher has been deleted successfully');
+    }
+
+    public function deleteSelected(Request $request)
+    {
+        $request->validate([
+            'selected_users' => 'required|array',
+            'selected_users.*' => 'exists:teachers,id',
+        ]);
+
+        Teacher::whereIn('id', $request->input('selected_users'))->delete();
+
+        return redirect()->route('teachers.index')->with('success', 'Teachers has been deleted successfully');
     }
 
     // protected function studentCertificatName($teacher_id)

@@ -12,6 +12,7 @@ Route::get('/', [SearchController::class, 'index'])->name('search.index');
 Route::resource('/teachers', TeacherController::class)->middleware(['auth']);
 Route::get('/teachers/{id}/download', [TeacherController::class, 'download'])->name('teacher.download')->middleware(['auth']);
 Route::get('donwload-file', [TeacherController::class, 'downloadExcelExample'])->name('donwload.excel.example')->middleware(['auth']);
+Route::delete('/teachers', [TeacherController::class, 'deleteSelected'])->name('teachers.deleteSelected')->middleware(['auth']);
 
 Route::resource('/students', StudentController::class)->middleware(['auth']);
 Route::get('/student/{id}/download', [StudentController::class, 'download'])->name('student.download')->middleware(['auth']);

@@ -97,41 +97,89 @@
 
                             <div class="h-96 col-span-4 rounded-md items-center">
                                 <div class="bg-white shadow-md rounded">
-                                    <table class="min-w-max w-full table-auto">
-                                        <thead>
-                                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                                <th class="py-3 px-6 text-left">Seria</th>
-                                                <th class="py-3 px-6 text-left">Seria Number</th>
-                                                <th class="py-3 px-6 text-left">Full Name</th>
-                                                <th class="py-3 px-6 text-center">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-gray-600 text-sm font-light">
-                                            @foreach($teachers as $teacher)
-                                            <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                                <td class="py-3 px-6 text-left">
-                                                    <div class="flex items-center">
-                                                        <span>{{ $teacher->seria }}</span>
-                                                    </div>
-                                                </td>
-                                                <td class="py-3 px-6 text-left">
-                                                    <div class="flex items-center">
-                                                        <span>{{ $teacher->seria_number }}</span>
-                                                    </div>
-                                                </td>
-                                                <td class="py-3 px-6 text-left whitespace-nowrap">
-                                                    <div class="flex items-center">
-                                                        <span class="font-medium">{{ $teacher->ism }}
-                                                            {{ $teacher->familiya }}
-                                                            {{ $teacher->sharif }}</span>
-                                                    </div>
-                                                </td>
-                                                <td class="py-3 px-6 text-center">
-                                                    <div class="flex item-center justify-center">
-                                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                            <form action="{{ route('teachers.destroy', $teacher->id) }}" method="POST">
-                                                                @csrf
-                                                                <a href="{{ route('teachers.show', $teacher->id) }}">
+                                    <form action="{{ route('teachers.deleteSelected') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <table class="min-w-max w-full table-auto">
+                                            <thead>
+                                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                                    <th class="py-3 px-6 text-left">Select</th>
+                                                    <th class="py-3 px-6 text-left">Seria</th>
+                                                    <th class="py-3 px-6 text-left">Seria Number</th>
+                                                    <th class="py-3 px-6 text-left">Full Name</th>
+                                                    <th class="py-3 px-6 text-center">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-gray-600 text-sm font-light">
+                                                @foreach($teachers as $teacher)
+                                                
+                                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                                    <td class="py-3 px-6 text-left">
+                                                        <div class="flex items-center">
+                                                            <span><input type="checkbox" name="selected_users[]" value="{{ $teacher->id }}"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-3 px-6 text-left">
+                                                        <div class="flex items-center">
+                                                            <span>{{ $teacher->seria }}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-3 px-6 text-left">
+                                                        <div class="flex items-center">
+                                                            <span>{{ $teacher->seria_number }}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            <span class="font-medium">{{ $teacher->ism }}
+                                                                {{ $teacher->familiya }}
+                                                                {{ $teacher->sharif }}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-3 px-6 text-center">
+                                                        <div class="flex item-center justify-center">
+                                                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                                <form action="{{ route('teachers.destroy', $teacher->id) }}" method="POST">
+                                                                    @csrf
+                                                                    <a href="{{ route('teachers.show', $teacher->id) }}">
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none"
+                                                                            viewBox="0 0 24 24"
+                                                                            stroke="currentColor">
+                                                                            <path
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                stroke-width="2"
+                                                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                                            <path
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                stroke-width="2"
+                                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                                        </svg>
+                                                                    </a>
+                                                                </form>
+                                                            </div>
+
+                                                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                                <a href="{{ route('teacher.download', $teacher->id) }}">
+                                                                    <svg
+                                                                        class="http://www.w3.org/2000/svg"
+                                                                        fill="none"
+                                                                        viewBox="0 0 24 24"
+                                                                        stroke="currentColor">
+                                                                        <path
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            stroke-width="2"
+                                                                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                                <a href="{{ route('teachers.edit', $teacher->id) }}">
                                                                     <svg
                                                                         xmlns="http://www.w3.org/2000/svg"
                                                                         fill="none"
@@ -141,66 +189,36 @@
                                                                             stroke-linecap="round"
                                                                             stroke-linejoin="round"
                                                                             stroke-width="2"
-                                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                                        <path
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            stroke-width="2"
-                                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                                                                     </svg>
                                                                 </a>
-                                                            </form>
-                                                        </div>
+                                                            </div>
 
-                                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                            <a href="{{ route('teacher.download', $teacher->id) }}">
-                                                                <svg
-                                                                    class="http://www.w3.org/2000/svg"
-                                                                    fill="none"
-                                                                    viewBox="0 0 24 24"
-                                                                    stroke="currentColor">
-                                                                    <path
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                                                </svg>
-                                                            </a>
+                                                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                                <form action="{{ route('teachers.destroy', $teacher->id) }}" method="POST">
+                                                                    @csrf 
+                                                                    @method('DELETE')
+                                                                    <button
+                                                                        type="submit"
+                                                                        title="Delete"
+                                                                        onclick="return confirm('Are you sure delete user {{ $teacher->fullName() }}?')">
+                                                                        <i class="bi bi-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
                                                         </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
 
-                                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                            <a href="{{ route('teachers.edit', $teacher->id) }}">
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="none"
-                                                                    viewBox="0 0 24 24"
-                                                                    stroke="currentColor">
-                                                                    <path
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                            <form action="{{ route('teachers.destroy', $teacher->id) }}" method="POST">
-                                                                @csrf @method('DELETE')
-                                                                <button
-                                                                    type="submit"
-                                                                    title="Delete"
-                                                                    onclick="return confirm('Are you sure delete user {{ $teacher->fullName() }}?')">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                        <div class="mt-4">
+                                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                                Delete Selected
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                                 {{ $teachers->links('pagination::tailwind') }}
                             </div>
