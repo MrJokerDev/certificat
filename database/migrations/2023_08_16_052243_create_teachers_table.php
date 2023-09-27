@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('seria')->nullable();
             $table->string('seria_number')->unique()->length(7);
-            $table->string('ism');
-            $table->string('familiya');
+            $table->string('ism')->nullable();
+            $table->string('familiya')->nullable();
             $table->string('sharif')->nullable();
-            $table->date('berilgan_sana');
+            $table->date('berilgan_sana')->nullable();
             $table->string('umumiy')->nullable();
             $table->string('umumiy_ball')->nullable();
             $table->string('modul_1')->nullable();

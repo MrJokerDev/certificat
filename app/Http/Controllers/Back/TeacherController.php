@@ -18,6 +18,7 @@ use PhpOffice\PhpPresentation\Slide\Background\Image;
 use PhpOffice\PhpPresentation\Style\Color;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use PhpOffice\PhpPresentation\DocumentLayout;
+use PhpOffice\PhpPresentation\Style\Alignment;
 
 class TeacherController extends Controller
 {
@@ -75,12 +76,14 @@ class TeacherController extends Controller
 
         $nextSeriaNumber = Teacher::max('seria_number'); // Get the highest existing seria_number
 
-        $nextSeriaNumber = str_pad(intval($nextSeriaNumber) + 1, 7, '0', STR_PAD_LEFT); // Increment and format
-
+        // $nextSeriaNumber = str_pad(intval($nextSeriaNumber) + 1, 7, '0', STR_PAD_LEFT); // Increment and format
+        // dd($data);
         foreach ($data as $rowData) {
             foreach ($rowData as $row) {
                 $existingStudent = Teacher::where('ism', $row['ism'])->where('familiya', $row['familiya'])->first();
-                if (!$existingStudent) {
+
+                if (!$existingStudent && $row != null) {
+                    $nextSeriaNumber = str_pad(intval($nextSeriaNumber) + 1, 7, '0', STR_PAD_LEFT);
                     Teacher::create([
                         'seria' => 'MK',
                         'seria_number' => $nextSeriaNumber,
@@ -97,7 +100,6 @@ class TeacherController extends Controller
                         'modul_3' => $row['3_modul'],
                         'modul_ball_3' => $row['3_modul_ball']
                     ]);
-                    $nextSeriaNumber = str_pad(intval($nextSeriaNumber) + 1, 7, '0', STR_PAD_LEFT);
                 }
             }
         }
@@ -216,41 +218,34 @@ class TeacherController extends Controller
 
         // Set the dimensions and offsets for slide 1 Student Full name
         $shape_001 = $slide_001->createRichTextShape();
-        $shape_001->setHeight(600);
-        $shape_001->setWidth(1000);
-        $shape_001->setOffsetX(140);
+        $shape_001->setHeight(100);
+        $shape_001->setWidth(900);
+        $shape_001->setOffsetX(40);
         $shape_001->setOffsetY(270);
-
-        // Set the dimensions and offsets for slide 1 Student Course
-        $shape_001_1 = $slide_001->createRichTextShape();
-        $shape_001_1->setHeight(600);
-        $shape_001_1->setWidth(1000);
-        $shape_001_1->setOffsetX(400);
-        $shape_001_1->setOffsetY(460);
 
         // Set the dimensions and offsets for slide 1 Student Data 
         $shape_001_2 = $slide_001->createRichTextShape();
-        $shape_001_2->setHeight(600);
-        $shape_001_2->setWidth(1000);
+        $shape_001_2->setHeight(25);
+        $shape_001_2->setWidth(100);
         $shape_001_2->setOffsetX(370);
         $shape_001_2->setOffsetY(570);
 
         $shape_001_2_1 = $slide_001->createRichTextShape();
-        $shape_001_2_1->setHeight(600);
-        $shape_001_2_1->setWidth(1000);
+        $shape_001_2_1->setHeight(25);
+        $shape_001_2_1->setWidth(100);
         $shape_001_2_1->setOffsetX(483);
         $shape_001_2_1->setOffsetY(570);
 
         // Set the dimensions and offsets for slide 1 Student seria number
         $shape_001_3 = $slide_001->createRichTextShape();
-        $shape_001_3->setHeight(600);
-        $shape_001_3->setWidth(1000);
+        $shape_001_3->setHeight(25);
+        $shape_001_3->setWidth(100);
         $shape_001_3->setOffsetX(268);
         $shape_001_3->setOffsetY(570);
 
         $shape_001_3_1 = $slide_001->createRichTextShape();
-        $shape_001_3_1->setHeight(600);
-        $shape_001_3_1->setWidth(1000);
+        $shape_001_3_1->setHeight(25);
+        $shape_001_3_1->setWidth(100);
         $shape_001_3_1->setOffsetX(245);
         $shape_001_3_1->setOffsetY(570);
 
@@ -258,6 +253,11 @@ class TeacherController extends Controller
         $background_001 = new Image();
         $background_001->setPath(storage_path('img/sertificat005.png'));
         $slide_001->setBackground($background_001);
+
+        $alignment = new Alignment();
+        $alignment->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        $shape_001->getActiveParagraph()->setAlignment($alignment);
 
         // Set the text for slide 1 
         $textRun_001 = $shape_001->createTextRun(strtoupper($fullName));
@@ -295,71 +295,71 @@ class TeacherController extends Controller
         $slide_002 = $presentation->createSlide();
         // Set the dimensions and offsets for slide 2 Student full name
         $shape_002 = $slide_002->createRichTextShape();
-        $shape_002->setHeight(600);
-        $shape_002->setWidth(1000);
-        $shape_002->setOffsetX(180);
+        $shape_002->setHeight(50);
+        $shape_002->setWidth(900);
+        $shape_002->setOffsetX(40);
         $shape_002->setOffsetY(105);
 
         // Set the dimensions and offsets for slide 2 Student seria number
         $shape_002_1 = $slide_002->createRichTextShape();
-        $shape_002_1->setHeight(600);
-        $shape_002_1->setWidth(1000);
+        $shape_002_1->setHeight(30);
+        $shape_002_1->setWidth(100);
         $shape_002_1->setOffsetX(80);
         $shape_002_1->setOffsetY(30);
 
         $shape_002_1_2 = $slide_002->createRichTextShape();
-        $shape_002_1_2->setHeight(600);
-        $shape_002_1_2->setWidth(1000);
+        $shape_002_1_2->setHeight(30);
+        $shape_002_1_2->setWidth(50);
         $shape_002_1_2->setOffsetX(50);
         $shape_002_1_2->setOffsetY(30);
 
         // Set the dimensions and offsets for slide 2 Student Progress 4 bottom
         $shape_002_5 = $slide_002->createRichTextShape();
-        $shape_002_5->setHeight(600);
+        $shape_002_5->setHeight(30);
         $shape_002_5->setWidth(290);
         $shape_002_5->setOffsetX(200);
         $shape_002_5->setOffsetY(347);
 
         $shape_002_5_1 = $slide_002->createRichTextShape();
-        $shape_002_5_1->setHeight(600);
+        $shape_002_5_1->setHeight(30);
         $shape_002_5_1->setWidth(200);
         $shape_002_5_1->setOffsetX(235);
         $shape_002_5_1->setOffsetY(367);
 
         // Set the dimensions and offsets for slide 2 Student Progress 5 bottom
         $shape_002_6 = $slide_002->createRichTextShape();
-        $shape_002_6->setHeight(600);
+        $shape_002_6->setHeight(30);
         $shape_002_6->setWidth(200);
         $shape_002_6->setOffsetX(480);
         $shape_002_6->setOffsetY(347);
         // Set the dimensions and offsets for slide 2 Student Progress 5 bottom
         $shape_002_6_1 = $slide_002->createRichTextShape();
-        $shape_002_6_1->setHeight(600);
+        $shape_002_6_1->setHeight(30);
         $shape_002_6_1->setWidth(200);
         $shape_002_6_1->setOffsetX(515);
         $shape_002_6_1->setOffsetY(367);
 
         // Set the dimensions and offsets for slide 2 Student QrCode 1
         $shape_002_7 = $slide_002->createRichTextShape();
-        $shape_002_7->setHeight(600);
+        $shape_002_7->setHeight(30);
         $shape_002_7->setWidth(200);
         $shape_002_7->setOffsetX(770);
         $shape_002_7->setOffsetY(347);
 
         $shape_002_7_1 = $slide_002->createRichTextShape();
-        $shape_002_7_1->setHeight(600);
+        $shape_002_7_1->setHeight(30);
         $shape_002_7_1->setWidth(200);
         $shape_002_7_1->setOffsetX(805);
         $shape_002_7_1->setOffsetY(367);
 
         $shape_002_8 = $slide_002->createRichTextShape();
-        $shape_002_8->setHeight(600);
+        $shape_002_8->setHeight(30);
         $shape_002_8->setWidth(200);
         $shape_002_8->setOffsetX(770);
         $shape_002_8->setOffsetY(420);
 
         $shape_002_8_1 = $slide_002->createRichTextShape();
-        $shape_002_8_1->setHeight(600);
+        $shape_002_8_1->setHeight(30);
         $shape_002_8_1->setWidth(200);
         $shape_002_8_1->setOffsetX(800);
         $shape_002_8_1->setOffsetY(440);
@@ -369,6 +369,8 @@ class TeacherController extends Controller
         $background_002 = new Image();
         $background_002->setPath(storage_path('img/sertificat006.png'));
         $slide_002->setBackground($background_002);
+
+        $shape_002->getActiveParagraph()->setAlignment($alignment);
 
         // Set the text for slide 2 full_name
         $textRun_002 = $shape_002->createTextRun(strtoupper($fullName));

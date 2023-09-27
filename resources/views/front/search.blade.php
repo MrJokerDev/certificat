@@ -29,8 +29,10 @@
                                 <select id="seria" name="seria" class="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
                                     <option value="MK">MK</option>
                                     <option value="FS">FS</option>
+                                    <option value="FD">FD</option>
                                     <option value="DS">DS</option>
-                                    <option value="SW">SW</option>
+                                    <option value="SE">SE</option>
+                                    <option value="BD">BD</option>
                                 </select>
                             </div>
 
