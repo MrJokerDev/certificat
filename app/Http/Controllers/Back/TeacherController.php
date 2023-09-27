@@ -29,7 +29,7 @@ class TeacherController extends Controller
      */
     public function index(Request $request)
     {
-        $teachers = Teacher::search($request->search)->paginate(20);
+        $teachers = Teacher::search($request->search)->paginate(10);
 
         $certificats = [];
 
