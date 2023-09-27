@@ -57,7 +57,7 @@ class SearchController extends Controller
                 return view('front.showStudent', compact('student_certificat', 'registered_at'));
             } else {
                 return view('front.notFound')->with([
-                    'message' => 'Bunday seria raqamlik ' . $seria . $seria_number . ' sertifikat mavjud emas!'
+                    'message' => 'Bunday seriya raqamlik ' . $seria . $seria_number . ' sertifikat mavjud emas!'
                 ]);
             }
         }
