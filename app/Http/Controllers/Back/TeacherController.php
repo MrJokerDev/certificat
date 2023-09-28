@@ -265,7 +265,7 @@ class TeacherController extends Controller
 
         // Set the background image for slide 1
         $background_001 = new Image();
-        $background_001->setPath(storage_path('img/sertificat005.png'));
+        $background_001->setPath(storage_path('img/sertificat007.png'));
         $slide_001->setBackground($background_001);
 
         $alignment = new Alignment();
@@ -381,7 +381,7 @@ class TeacherController extends Controller
 
         // Set the background image for slide 2
         $background_002 = new Image();
-        $background_002->setPath(storage_path('img/sertificat006.png'));
+        $background_002->setPath(storage_path('img/sertificat008.png'));
         $slide_002->setBackground($background_002);
 
         $shape_002->getActiveParagraph()->setAlignment($alignment);
