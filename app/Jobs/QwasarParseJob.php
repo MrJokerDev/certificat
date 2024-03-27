@@ -16,21 +16,12 @@ class QwasarParseJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $students;
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
+
     public function __construct($students)
     {
         $this->students = $students;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         $client = new Client();

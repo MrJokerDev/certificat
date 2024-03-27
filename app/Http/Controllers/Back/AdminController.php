@@ -2,27 +2,17 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Exports\AttendanceExport;
 use App\Http\Controllers\Controller;
-use App\Models\Attendance;
 use App\Models\Student;
-use App\Models\StudentCertificate;
 use App\Models\Teacher;
 use App\Models\TeacherCertificat;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\View\View;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $search = $request->input('search');
 
@@ -33,7 +23,7 @@ class AdminController extends Controller
         return view('back.teachers.index', compact('students'));
     }
 
-    public function date_students()
+    public function date_students(): JsonResponse
     {
         $teachers = Teacher::all();
 
@@ -56,71 +46,10 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *                                                                                                                                   
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id)
+    public function show(Request $request, $id): View
     {
         $students = Student::find($id);
 
         return view('actions.show', compact('students'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

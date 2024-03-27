@@ -7,27 +7,35 @@ use App\Imports\TeachersImport;
 use App\Models\Teacher;
 use App\Models\TeacherCertificat;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpPresentation\IOFactory;
-use PhpOffice\PhpPresentation\PhpPresentation;
+// use PhpOffice\PhpPresentation\PhpPresentation;
 use PhpOffice\PhpPresentation\Shape\Drawing\File;
 use PhpOffice\PhpPresentation\Slide\Background\Image;
 use PhpOffice\PhpPresentation\Style\Color;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+// use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use PhpOffice\PhpPresentation\DocumentLayout;
 use PhpOffice\PhpPresentation\Style\Alignment;
+use SimpleSoftwareIO\QrCode\Facades\QrCode as QrCodeFacade;
+use PhpOffice\PhpPresentation\PhpPresentation as PhpPresentation;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    protected $qrCode;
+    protected $phpPresentation;
+
+    public function __construct(QrCodeFacade $qrCode, PhpPresentation $phpPresentation)
+    {
+        $this->qrCode = $qrCode;
+        $this->phpPresentation = $phpPresentation;
+    }
+
+    public function index(Request $request): View
     {
         $teachers = Teacher::search($request->search)->paginate(10);
 
@@ -41,6 +49,7 @@ class TeacherController extends Controller
 
             if (!Storage::exists('qrcode/teachers/' . $teacher_fullName . '.png')) {
                 $qrcode_img = 'qrcode/teachers/' . $teacher_fullName . '.png';
+
                 Storage::disk('local')->put($qrcode_img, $qrcode['sertificat']);
             }
         }
@@ -48,23 +57,7 @@ class TeacherController extends Controller
         return view('back.teachers.index', compact('teachers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'file' => 'required|mimes:xlsx',
@@ -76,8 +69,6 @@ class TeacherController extends Controller
 
         $nextSeriaNumber = Teacher::max('seria_number'); // Get the highest existing seria_number
 
-        // $nextSeriaNumber = str_pad(intval($nextSeriaNumber) + 1, 7, '0', STR_PAD_LEFT); // Increment and format
-        // dd($data);
         foreach ($data as $rowData) {
             foreach ($rowData as $row) {
                 $existingStudent = Teacher::where('ism', $row['ism'])->where('familiya', $row['familiya'])->first();
@@ -90,7 +81,7 @@ class TeacherController extends Controller
                         'ism' => $row['ism'],
                         'familiya' => $row['familiya'],
                         'sharif' => $row['sharif'],
-                        'berilgan_sana' => Date::excelToDateTimeObject($row["berilgan_sana"])->format('d.m.Y'),
+                        'berilgan_sana' => $row["berilgan_sana"], //Date::excelToDateTimeObject($row["berilgan_sana"])->format('d.m.Y')
                         'umumiy' => $row['umumiy'],
                         'umumiy_ball' => $row['umumiy_ball'],
                         'modul_1' => $row['1_modul'],
@@ -107,18 +98,12 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index')->with('success', 'Teachers imported successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($id): View
     {
         $teacher = Teacher::find($id);
         $teacherCertificate = TeacherCertificat::where('teacher_id', $teacher->id)->pluck('certificate_path')->first();
 
-        $certificate = storage_path('app/public/' . $teacherCertificate);
+        storage_path('app/public/' . $teacherCertificate);
 
         if (!Storage::exists('public/' . $teacherCertificate)) {
             abort(404);
@@ -127,40 +112,19 @@ class TeacherController extends Controller
         return view('back.teachers.show', compact('teacher', 'teacherCertificate'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Teacher $teacher)
+    public function edit(Teacher $teacher): View
     {
         return view('back.teachers.edit', compact('teacher'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, Teacher $teacher): RedirectResponse
     {
         $teacher->update($request->all());
         return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Teacher $teacher, Request $request)
+    public function destroy(Teacher $teacher, Request $request): RedirectResponse
     {
-
-
         $teacherCertificat = TeacherCertificat::where('teacher_id', $teacher->id)->first();
         $teacher = Teacher::where('id', $teacher->id)->first();
 
@@ -191,23 +155,9 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index')->with('success', 'Teachers has been deleted successfully');
     }
 
-    // protected function studentCertificatName($teacher_id)
-    // {
-    //     $teacherCertificatName = TeacherCertificat::where('teacher_id', $teacher_id)->get();
-    //     return $teacherCertificatName;
-    // }
-
     protected function qrCodeGenerateStudent($link)
     {
-        $sertificat_qrcode = QrCode::format('png')
-            ->size(200)
-            ->generate(
-                $link
-            );
-
-        return [
-            'sertificat' => $sertificat_qrcode,
-        ];
+        return QrCodeFacade::format('png')->size(200)->generate($link); //
     }
 
     protected function generatePresentation($student)
@@ -237,7 +187,7 @@ class TeacherController extends Controller
         $shape_001->setOffsetX(40);
         $shape_001->setOffsetY(270);
 
-        // Set the dimensions and offsets for slide 1 Student Data 
+        // Set the dimensions and offsets for slide 1 Student Data
         $shape_001_2 = $slide_001->createRichTextShape();
         $shape_001_2->setHeight(25);
         $shape_001_2->setWidth(100);
@@ -273,7 +223,7 @@ class TeacherController extends Controller
 
         $shape_001->getActiveParagraph()->setAlignment($alignment);
 
-        // Set the text for slide 1 
+        // Set the text for slide 1
         $textRun_001 = $shape_001->createTextRun(strtoupper($fullName));
         $textRun_001->getFont('Gilroy');
         $textRun_001->getFont()->setColor(new Color('FF5430CE'));
@@ -447,14 +397,6 @@ class TeacherController extends Controller
             ->setOffsetX(822)
             ->setOffsetY(477);
         $slide_002->addShape($qrCodeImg);
-
-        // //Set the alignment for slide 1
-        // $paragraph_001 = $shape_001->getActiveParagraph();
-        // $paragraph_001->setAlignment(new Alignment(Alignment::HORIZONTAL_RIGHT, Alignment::VERTICAL_AUTO));
-
-        // // Set the alignment for slide 2
-        // $paragraph_002 = $shape_002->getActiveParagraph();
-        // $paragraph_002->setAlignment(new Alignment(Alignment::HORIZONTAL_RIGHT, Alignment::VERTICAL_AUTO));
 
         return $presentation;
     }

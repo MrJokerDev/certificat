@@ -61,9 +61,6 @@ class SearchController extends Controller
                 ]);
             }
         }
-        // $student_certificat = Teacher::where('seria_number', $seria_number)->where('seria', $seria)->first();
-        // $students = Student::where('seria_number', $seria_number)->where('seria', $seria)->first();
-
 
     }
 }

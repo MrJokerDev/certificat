@@ -62,16 +62,6 @@ class StudentController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -204,7 +194,7 @@ class StudentController extends Controller
         $slide_course->setOffsetX(290);
         $slide_course->setOffsetY(475);
 
-        // Set the dimensions and offsets for slide 1 Student Data 
+        // Set the dimensions and offsets for slide 1 Student Data
         $slide_dateS = $slide_001->createRichTextShape();
         $slide_dateS->setHeight(600);
         $slide_dateS->setWidth(600);
@@ -235,7 +225,7 @@ class StudentController extends Controller
         $background_001->setPath(storage_path('img/sertificat001.png'));
         $slide_001->setBackground($background_001);
 
-        // Set the text for slide 1 
+        // Set the text for slide 1
         $slide_full_name = $slide_full_name->createTextRun($student->full_name);
         $slide_full_name->getFont()->setSize(28);
         $slide_full_name->getFont()->setColor(new Color('FF5430CE'));
